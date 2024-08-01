@@ -376,7 +376,7 @@ fun LazyItemScope.ActionItem(idx: Int, action: Action, onSelect: (Action) -> Uni
         .width(width)
         .fillMaxHeight()
 
-    val contentCol = MaterialTheme.colorScheme.onBackground
+    val contentCol = MaterialTheme.colorScheme.onSurfaceVariant
 
     Box(modifier = modifier
         .clip(CircleShape)
@@ -670,7 +670,7 @@ fun ActionBar(
             Surface(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(actionBarHeight), color = MaterialTheme.colorScheme.tertiary
+                    .height(actionBarHeight), color = MaterialTheme.colorScheme.surfaceVariant
             ) {
                 ActionItems(onActionActivated, onActionAltActivated)
             }
