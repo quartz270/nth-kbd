@@ -55,6 +55,7 @@ import org.futo.inputmethod.latin.uix.theme.Typography
 import org.futo.inputmethod.latin.uix.theme.UixThemeWrapper
 import org.futo.inputmethod.latin.uix.theme.presets.AMOLEDDarkPurple
 import org.futo.inputmethod.latin.uix.theme.presets.AMOLEDNothing
+import org.futo.inputmethod.latin.uix.theme.presets.NothingLight
 import org.futo.inputmethod.latin.uix.theme.presets.ClassicMaterialDark
 import org.futo.inputmethod.latin.uix.theme.presets.DynamicDarkTheme
 import org.futo.inputmethod.latin.uix.theme.presets.DynamicLightTheme
@@ -315,6 +316,13 @@ private fun ThemePickerPreview() {
             }
         }
         UixThemeWrapper(AMOLEDNothing.obtainColors(LocalContext.current)) {
+            Surface(
+                color = MaterialTheme.colorScheme.background
+            ) {
+                ThemePicker {}
+            }
+        }
+        UixThemeWrapper(NothingLight.obtainColors(LocalContext.current)) {
             Surface(
                 color = MaterialTheme.colorScheme.background
             ) {
