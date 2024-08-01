@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -27,6 +28,8 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.util.Xml;
 import android.view.ContextThemeWrapper;
+
+import androidx.core.content.res.ResourcesCompat;
 
 import org.futo.inputmethod.annotations.UsedForTesting;
 import org.futo.inputmethod.keyboard.Key;
@@ -154,6 +157,7 @@ public class KeyboardBuilder<KP extends KeyboardParams> {
     private Key mRightEdgeKey = null;
 
     private DynamicThemeProvider mProvider = null;
+    private Typeface mNdotTypeface;
 
     public KeyboardBuilder(final Context context, @Nonnull final KP params) {
         mContext = context;
@@ -167,8 +171,9 @@ public class KeyboardBuilder<KP extends KeyboardParams> {
         }
 
         final Resources res = context.getResources();
-        mResources = res;
+        mNdotTypeface = ResourcesCompat.getFont(context, R.font.ndot_family);
 
+        mResources = res;
         mParams = params;
 
         params.GRID_WIDTH = res.getInteger(R.integer.config_keyboard_grid_width);
@@ -307,7 +312,7 @@ public class KeyboardBuilder<KP extends KeyboardParams> {
             params.mDefaultRowHeight = (int)ResourceUtils.getDimensionOrFraction(keyboardAttr,
                     R.styleable.Keyboard_rowHeight, baseHeight, baseHeight / DEFAULT_KEYBOARD_ROWS);
 
-            params.mKeyVisualAttributes = KeyVisualAttributes.newInstance(keyAttr, mProvider);
+            params.mKeyVisualAttributes = KeyVisualAttributes.newInstance(keyAttr, mProvider, mNdotTypeface);
 
             params.mMoreKeysTemplate = keyboardAttr.getResourceId(
                     R.styleable.Keyboard_moreKeysTemplate, 0);

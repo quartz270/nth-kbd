@@ -22,6 +22,7 @@
     <string name="action_kind_disabled">Hidden Actions</string>
 
     <string name="amoled_dark_theme_name">AMOLED Dark Purple</string>
+    <string name="amoled_nothing_theme_name">Nothing</string>
     <string name="classic_material_dark_theme_name">AOSP Material Dark</string>
     <string name="classic_material_light_theme_name">AOSP Material Light</string>
     <string name="voice_input_theme_name">FUTO VI Theme</string>

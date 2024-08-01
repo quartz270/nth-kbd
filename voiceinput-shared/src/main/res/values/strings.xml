@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="stop_recording">Stop Recording</string>
-    <string name="try_saying_something">Try saying something</string>
+    <string name="try_saying_something" />
     <string name="no_audio_detected_is_your_microphone_blocked">No audio detected, is your microphone blocked?</string>
     <string name="listening">Listening…</string>
     <string name="grant_microphone_permission_to_use_voice_input">Grant microphone permission to use Voice Input</string>

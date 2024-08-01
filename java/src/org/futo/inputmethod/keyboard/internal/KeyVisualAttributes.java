@@ -16,10 +16,16 @@
 
 package org.futo.inputmethod.keyboard.internal;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.util.SparseIntArray;
 
+import androidx.core.content.res.ResourcesCompat;
+
+import org.futo.inputmethod.latin.LatinIME;
 import org.futo.inputmethod.latin.uix.DynamicThemeProvider;
 import org.futo.inputmethod.latin.R;
 import org.futo.inputmethod.latin.utils.ResourceUtils;
@@ -89,26 +95,27 @@ public final class KeyVisualAttributes {
     }
 
     @Nullable
-    public static KeyVisualAttributes newInstance(@Nonnull final TypedArray keyAttr, @Nullable final DynamicThemeProvider provider) {
+    public static KeyVisualAttributes newInstance(@Nonnull final TypedArray keyAttr, @Nullable final DynamicThemeProvider provider, @Nullable final Typeface typeface) {
         final int indexCount = keyAttr.getIndexCount();
         for (int i = 0; i < indexCount; i++) {
             final int attrId = keyAttr.getIndex(i);
             if (sVisualAttributeIds.get(attrId, ATTR_NOT_FOUND) == ATTR_NOT_FOUND) {
                 continue;
             }
-            return new KeyVisualAttributes(keyAttr, provider);
+            return new KeyVisualAttributes(keyAttr, provider, typeface);
         }
         return null;
     }
 
-    private KeyVisualAttributes(@Nonnull final TypedArray keyAttr, @Nullable final DynamicThemeProvider provider) {
-        if (keyAttr.hasValue(R.styleable.Keyboard_Key_keyTypeface)) {
+    private KeyVisualAttributes(@Nonnull final TypedArray keyAttr, @Nullable final DynamicThemeProvider provider, @Nullable final Typeface typeface) {
+        if (typeface != null) {
+            mTypeface = typeface;
+        } else if (keyAttr.hasValue(R.styleable.Keyboard_Key_keyTypeface)) {
             mTypeface = Typeface.defaultFromStyle(
                     keyAttr.getInt(R.styleable.Keyboard_Key_keyTypeface, Typeface.NORMAL));
         } else {
             mTypeface = null;
         }
-
         mLetterRatio = ResourceUtils.getFraction(keyAttr,
                 R.styleable.Keyboard_Key_keyLetterSize);
         mLetterSize = ResourceUtils.getDimensionPixelSize(keyAttr,

@@ -154,7 +154,7 @@ fun SetupChangeDefaultIME(doublePackage: Boolean = true) {
             Step(fraction = 2.0f/3.0f, text = "Setup - Step 2 of 3")
 
             Text(
-                "Please select FUTO Keyboard as your active input method.",
+                "Please select Nothing Keyboard as your active input method.",
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth()
             )

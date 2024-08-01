@@ -18,6 +18,9 @@ package org.futo.inputmethod.keyboard.internal;
 
 import android.graphics.Typeface;
 
+import androidx.core.content.res.ResourcesCompat;
+
+import org.futo.inputmethod.latin.R;
 import org.futo.inputmethod.latin.utils.ResourceUtils;
 
 import javax.annotation.Nonnull;

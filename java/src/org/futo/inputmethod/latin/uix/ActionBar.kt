@@ -71,6 +71,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -160,8 +161,8 @@ interface ImportantNotice {
 
 
 val suggestionStylePrimary = TextStyle(
-    fontFamily = FontFamily.SansSerif,
-    fontWeight = FontWeight.Medium,
+    fontFamily = FontFamily(Font(R.font.ndot_family)),
+    fontWeight = FontWeight.Normal,
     fontSize = 18.sp,
     lineHeight = 26.sp,
     letterSpacing = 0.5.sp,
@@ -169,7 +170,7 @@ val suggestionStylePrimary = TextStyle(
 )
 
 val suggestionStyleAlternative = TextStyle(
-    fontFamily = FontFamily.SansSerif,
+    fontFamily = FontFamily(Font(R.font.ndot_family)),
     fontWeight = FontWeight.Normal,
     fontSize = 18.sp,
     lineHeight = 26.sp,
@@ -237,24 +238,9 @@ fun RowScope.SuggestionItem(words: SuggestedWords, idx: Int, isPrimary: Boolean,
 
     val iconColor = MaterialTheme.colorScheme.onBackground
     val topSuggestionIcon = painterResource(id = R.drawable.transformer_suggestion)
-    val textButtonModifier = when (wordInfo?.mOriginatesFromTransformerLM) {
-        true -> Modifier.drawBehind {
-            with(topSuggestionIcon) {
-                val iconSize = topSuggestionIcon.intrinsicSize
-                translate(
-                    left = (size.width - iconSize.width) / 2.0f,
-                    top = size.height - iconSize.height * 2.0f
-                ) {
-                    draw(
-                        topSuggestionIcon.intrinsicSize,
-                        alpha = if(actualIsPrimary){ 1.0f } else { 0.66f } / 1.25f,
-                        colorFilter = ColorFilter.tint(color = iconColor)
-                    )
-                }
-            }
-        }
-        else -> Modifier
-    }
+    val textButtonModifier = Modifier
+        .weight(1.0f)
+        .fillMaxHeight()
 
     val textModifier = when (actualIsPrimary) {
         true -> Modifier
@@ -684,7 +670,7 @@ fun ActionBar(
             Surface(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(actionBarHeight), color = MaterialTheme.colorScheme.background
+                    .height(actionBarHeight), color = MaterialTheme.colorScheme.tertiary
             ) {
                 ActionItems(onActionActivated, onActionAltActivated)
             }

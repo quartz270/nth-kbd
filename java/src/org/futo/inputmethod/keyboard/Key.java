@@ -28,6 +28,8 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 
+import androidx.core.content.res.ResourcesCompat;
+
 import org.futo.inputmethod.keyboard.internal.KeyDrawParams;
 import org.futo.inputmethod.keyboard.internal.KeySpecParser;
 import org.futo.inputmethod.keyboard.internal.KeyStyle;
@@ -71,6 +73,8 @@ public class Key implements Comparable<Key> {
     private static final int LABEL_FLAGS_FONT_NORMAL = 0x10;
     private static final int LABEL_FLAGS_FONT_MONO_SPACE = 0x20;
     private static final int LABEL_FLAGS_FONT_DEFAULT = 0x30;
+
+    private static final int LABEL_FLAGS_FONT_CUSTOM = 0x41;
     // Start of key text ratio enum values
     private static final int LABEL_FLAGS_FOLLOW_KEY_TEXT_RATIO_MASK = 0x1C0;
     private static final int LABEL_FLAGS_FOLLOW_KEY_LARGE_LETTER_RATIO = 0x40;
@@ -423,7 +427,7 @@ public class Key implements Comparable<Key> {
                 ? StringUtils.toTitleCaseOfKeyCode(altCodeInAttr, localeForUpcasing)
                 : altCodeInAttr;
         mOptionalAttributes = OptionalAttributes.newInstance(outputText, altCode, visualInsetsLeft, visualInsetsRight);
-        mKeyVisualAttributes = KeyVisualAttributes.newInstance(keyAttr, null);
+        mKeyVisualAttributes = KeyVisualAttributes.newInstance(keyAttr, null, null);
         mHashCode = computeHashCode(this);
     }
 
@@ -693,7 +697,7 @@ public class Key implements Comparable<Key> {
     public final Typeface selectTypeface(final KeyDrawParams params) {
         switch (mLabelFlags & LABEL_FLAGS_FONT_MASK) {
         case LABEL_FLAGS_FONT_NORMAL:
-            return Typeface.DEFAULT;
+            return Typeface.DEFAULT_BOLD;
         case LABEL_FLAGS_FONT_MONO_SPACE:
             return Typeface.MONOSPACE;
         case LABEL_FLAGS_FONT_DEFAULT:

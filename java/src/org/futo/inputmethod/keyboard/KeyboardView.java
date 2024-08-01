@@ -34,6 +34,8 @@ import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 
+import androidx.core.content.res.ResourcesCompat;
+
 import org.futo.inputmethod.keyboard.internal.KeyDrawParams;
 import org.futo.inputmethod.keyboard.internal.KeyVisualAttributes;
 import org.futo.inputmethod.latin.uix.DynamicThemeProvider;
@@ -186,7 +188,9 @@ public class KeyboardView extends View {
         keyboardViewAttr.recycle();
 
         mDefaultKeyLabelFlags = keyAttr.getInt(R.styleable.Keyboard_Key_keyLabelFlags, 0);
-        mKeyVisualAttributes = KeyVisualAttributes.newInstance(keyAttr, mDrawableProvider);
+        Typeface mNdotTypeface = ResourcesCompat.getFont(context, R.font.ndot_family);
+
+        mKeyVisualAttributes = KeyVisualAttributes.newInstance(keyAttr, mDrawableProvider, mNdotTypeface);
 
         if((isMoreKeys || isMoreKeysAction) && mKeyVisualAttributes != null) {
             mKeyVisualAttributes.mTextColor = mDrawableProvider.getMoreKeysTextColor();
