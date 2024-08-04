@@ -785,7 +785,7 @@ class PersistentEmojiState : PersistentActionState {
 
 
 val EmojiAction = Action(
-    icon = R.drawable.smile,
+    icon = R.drawable.nth_smile,
     name = R.string.emoji_action_title,
     canShowKeyboard = true,
     simplePressImpl = null,
