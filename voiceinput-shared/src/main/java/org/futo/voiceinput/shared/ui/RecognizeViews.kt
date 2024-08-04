@@ -1,6 +1,11 @@
 package org.futo.voiceinput.shared.ui
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Canvas
@@ -29,6 +34,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableFloatState
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -57,6 +63,12 @@ import kotlinx.coroutines.delay
 import org.futo.voiceinput.shared.R
 import org.futo.voiceinput.shared.types.MagnitudeState
 import org.futo.voiceinput.shared.ui.theme.Typography
+
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
+import kotlin.math.abs
 
 data class MicrophoneDeviceState(
     val bluetoothAvailable: Boolean,
@@ -98,7 +110,10 @@ private fun FakeToast(modifier: Modifier, message: String?) {
     if(message != null) {
         AnimatedVisibility(
             visible = visible.value,
-            modifier = modifier.alpha(0.9f).background(MaterialTheme.colorScheme.surfaceDim, RoundedCornerShape(100)).padding(16.dp),
+            modifier = modifier
+                .alpha(0.9f)
+                .background(MaterialTheme.colorScheme.surfaceDim, RoundedCornerShape(100))
+                .padding(16.dp),
             enter = fadeIn(),
             exit = fadeOut()
         ) {
@@ -111,7 +126,9 @@ private fun FakeToast(modifier: Modifier, message: String?) {
 
 @Composable
 private fun BoxScope.BluetoothToggleIcon(device: MutableState<MicrophoneDeviceState>? = null) {
-    FakeToast(modifier = Modifier.align(Alignment.BottomCenter).offset(y = (-16).dp), message = if(device?.value?.bluetoothActive == true) {
+    FakeToast(modifier = Modifier
+        .align(Alignment.BottomCenter)
+        .offset(y = (-16).dp), message = if(device?.value?.bluetoothActive == true) {
         "Using Bluetooth mic (${device.value.deviceName})"
     } else if(device?.value?.bluetoothAvailable == true || device?.value?.bluetoothPreferredByUser == true) {
         "Using Built-in mic (${device.value.deviceName})"
@@ -169,43 +186,73 @@ fun InnerRecognize(
     device: MutableState<MicrophoneDeviceState>? = null
 ) {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        DotPattern()
         AnimatedRecognizeCircle(magnitude = magnitude)
-
         Icon(
             painter = painterResource(R.drawable.mic_2_),
             contentDescription = stringResource(R.string.stop_recording),
             modifier = Modifier.size(48.dp),
             tint = MaterialTheme.colorScheme.onPrimaryContainer
         )
-
         val text = when (state.value) {
             MagnitudeState.NOT_TALKED_YET -> stringResource(R.string.try_saying_something)
             MagnitudeState.MIC_MAY_BE_BLOCKED -> stringResource(R.string.no_audio_detected_is_your_microphone_blocked)
             MagnitudeState.TALKING -> stringResource(R.string.listening)
         }
-
-        Text(
-            text,
-            modifier = Modifier
-                .fillMaxWidth()
-                .offset(x = 0.dp, y = 48.dp),
-            textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.onSurface
-        )
+//
+//        Text(
+//            text,
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .offset(x = 0.dp, y = 48.dp),
+//            textAlign = TextAlign.Center,
+//            color = MaterialTheme.colorScheme.onSurface
+//        )
 
         BluetoothToggleIcon(device)
     }
 }
 
+@Preview
+@Composable
+fun BreathingCircle(initVal: Float = 10f) {
+    val infiniteTransition = rememberInfiniteTransition(label = "")
+    val animSize by infiniteTransition.animateFloat(
+        initialValue = initVal,
+        targetValue = 100f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(1000),
+            repeatMode = RepeatMode.Reverse
+        ), label = ""
+    )
+    val primaryColor = MaterialTheme.colorScheme.primary
+
+    Canvas(modifier = Modifier.fillMaxSize()) {
+        val canvasWidth = size.width
+        val canvasHeight = size.height
+
+        drawCircle(
+            color = primaryColor,
+            radius = animSize.dp.toPx(),
+            center = Offset(
+                x = canvasWidth / 2,
+                y = canvasHeight / 2
+            )
+        )
+    }
+}
 
 @Composable
-fun ColumnScope.RecognizeLoadingCircle(text: String = "Initializing...") {
-    CircularProgressIndicator(
-        modifier = Modifier.align(Alignment.CenterHorizontally),
-        color = MaterialTheme.colorScheme.primary
-    )
-    Spacer(modifier = Modifier.height(8.dp))
-    Text(text, modifier = Modifier.align(Alignment.CenterHorizontally))
+fun ColumnScope.RecognizeLoadingCircle(text: String = "Initializing...", initVal: Float) {
+    Box(contentAlignment = Alignment.Center) {
+        DotPattern()
+        BreathingCircle(initVal = initVal)
+//        CircularProgressIndicator(
+//            color = MaterialTheme.colorScheme.primary
+//        )
+//        Spacer(modifier = Modifier.height(8.dp))
+//        Text(text)
+    }
 }
 
 @Composable
@@ -257,5 +304,38 @@ fun ColumnScope.RecognizeMicError(openSettings: () -> Unit) {
             modifier = Modifier.size(32.dp),
             tint = MaterialTheme.colorScheme.onSurface
         )
+    }
+}
+
+
+@Composable
+fun DotPattern(modifier: Modifier = Modifier, padding: Dp = 3.dp) {
+    val dotColor = MaterialTheme.colorScheme.onSurfaceVariant
+    Canvas(modifier = modifier
+        .fillMaxSize()) {
+        val dotRadius = 4.dp.toPx()
+        val dotSpacing = 8.dp.toPx()
+        val paddingPx = padding.toPx()
+
+        val canvasWidth = size.width - (paddingPx.toInt() * 2)
+        val canvasHeight = size.height - (paddingPx.toInt() * 2)
+
+        for (x in paddingPx.toInt()..canvasWidth.toInt() step (dotRadius * 2 + dotSpacing).toInt()) {
+            for (y in paddingPx.toInt()..canvasHeight.toInt() step (dotRadius * 2 + dotSpacing).toInt()) {
+                drawCircle(
+                    color = dotColor,
+                    radius = dotRadius,
+                    center = Offset(x.toFloat() + dotRadius, y.toFloat() + dotRadius)
+                )
+            }
+        }
+    }
+}
+
+@Preview
+@Composable
+fun DotPatternPreview() {
+    Box(modifier = Modifier.size(500.dp, 300.dp), contentAlignment = Alignment.TopStart) {
+        DotPattern()
     }
 }

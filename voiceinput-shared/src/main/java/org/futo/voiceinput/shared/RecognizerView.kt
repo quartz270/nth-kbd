@@ -90,7 +90,7 @@ class RecognizerView(
         when (currentViewState.value) {
             CurrentView.LoadingCircle -> {
                 Column {
-                    RecognizeLoadingCircle(text = loadingCircleText.value)
+                    RecognizeLoadingCircle(text = loadingCircleText.value, initVal = magnitudeState.floatValue)
                 }
             }
 
