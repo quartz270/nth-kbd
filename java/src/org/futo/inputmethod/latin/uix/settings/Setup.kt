@@ -27,6 +27,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.clearAndSetSemantics
@@ -53,7 +54,7 @@ fun SetupContainer(inner: @Composable () -> Unit) {
                 modifier = Modifier
                     .matchParentSize()
                     .align(Alignment.Center),
-                tint = MaterialTheme.colorScheme.onBackground
+                tint = Color.Unspecified
             )
         }
 
@@ -114,7 +115,7 @@ fun SetupEnableIME() {
             Step(fraction = 1.0f/3.0f, text = "Setup - Step 1 of 3")
 
             Text(
-                "Welcome to FUTO Keyboard alpha! Please keep in mind things may be rough. This is not a finished product in any way.\n\nFirst, enable FUTO Keyboard as an input method.",
+                "Welcome to Nothing Keyboard (based on FUTO Keyboard)! Please keep in mind things may be rough. This is not a finished product in any way.\n\nFirst, enable FUTO Keyboard as an input method.",
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth()
             )
@@ -218,7 +219,7 @@ fun SetupEnableMic(onClick: () -> Unit = { }) {
                     .fillMaxWidth()
                     .padding(16.dp)
             ) {
-                Text("FUTO Keyboard (needs mic permission)")
+                Text("Nothing Keyboard (needs mic permission)")
             }
 
             Button(
