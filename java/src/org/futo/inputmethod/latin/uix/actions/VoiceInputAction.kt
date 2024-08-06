@@ -26,13 +26,18 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.yield
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.Response
 import org.futo.inputmethod.latin.R
+import org.futo.inputmethod.latin.uix.AI_ASSIST
 import org.futo.inputmethod.latin.uix.AUDIO_FOCUS
 import org.futo.inputmethod.latin.uix.Action
 import org.futo.inputmethod.latin.uix.ActionWindow
 import org.futo.inputmethod.latin.uix.DISALLOW_SYMBOLS
 import org.futo.inputmethod.latin.uix.ENABLE_SOUND
 import org.futo.inputmethod.latin.uix.KeyboardManagerForAction
+import org.futo.inputmethod.latin.uix.OPEN_AI_KEY
 import org.futo.inputmethod.latin.uix.PREFER_BLUETOOTH
 import org.futo.inputmethod.latin.uix.PersistentActionState
 import org.futo.inputmethod.latin.uix.ResourceHelper
@@ -43,11 +48,14 @@ import org.futo.inputmethod.latin.uix.voiceinput.downloader.DownloadActivity
 import org.futo.inputmethod.latin.xlm.UserDictionaryObserver
 import org.futo.inputmethod.updates.openURI
 import org.futo.voiceinput.shared.ModelDoesNotExistException
+import org.futo.voiceinput.shared.OpenAIHelper
+import org.futo.voiceinput.shared.OpenAIHelper.ResponseCallback
 import org.futo.voiceinput.shared.RecognizerView
 import org.futo.voiceinput.shared.RecognizerViewListener
 import org.futo.voiceinput.shared.RecognizerViewSettings
 import org.futo.voiceinput.shared.RecordingSettings
 import org.futo.voiceinput.shared.SoundPlayer
+import org.futo.voiceinput.shared.TextToSpeechHelper
 import org.futo.voiceinput.shared.types.Language
 import org.futo.voiceinput.shared.types.ModelLoader
 import org.futo.voiceinput.shared.types.getLanguageFromWhisperString
@@ -55,7 +63,10 @@ import org.futo.voiceinput.shared.ui.MicrophoneDeviceState
 import org.futo.voiceinput.shared.whisper.DecodingConfiguration
 import org.futo.voiceinput.shared.whisper.ModelManager
 import org.futo.voiceinput.shared.whisper.MultiModelRunConfiguration
+import org.json.JSONObject
+import java.io.IOException
 import java.util.Locale
+
 
 val SystemVoiceInputAction = Action(
     icon = R.drawable.mic_fill,
@@ -86,6 +97,20 @@ private class VoiceInputActionWindow(
     val context = manager.getContext()
 
     private var shouldPlaySounds: Boolean = false
+    private var aiAssistEnabled: Boolean = false
+    private var openAiAPIKey: String = ""
+
+    private var mttsHelper = TextToSpeechHelper(context)
+    private lateinit var oaiHelper: OpenAIHelper;
+
+    override fun toggleAIAssist():Boolean  {
+        manager.getLifecycleScope().launch {
+            context.setSetting(AI_ASSIST, !aiAssistEnabled)
+        }
+        aiAssistEnabled = !aiAssistEnabled
+        return aiAssistEnabled
+    }
+
     private suspend fun loadSettings(): RecognizerViewSettings = coroutineScope {
         val enableSound = async { context.getSetting(ENABLE_SOUND) }
         val verboseFeedback = async { context.getSetting(VERBOSE_PROGRESS) }
@@ -93,13 +118,18 @@ private class VoiceInputActionWindow(
         val useBluetoothAudio = async { context.getSetting(PREFER_BLUETOOTH) }
         val requestAudioFocus = async { context.getSetting(AUDIO_FOCUS) }
 
+        val openAiKeyPromise = async { context.getSetting(OPEN_AI_KEY) }
+        val enableAiAssist = async { context.getSetting(AI_ASSIST) }
+
         val primaryModel = model
         val languageSpecificModels = mutableMapOf<Language, ModelLoader>()
         val allowedLanguages = setOf(
             getLanguageFromWhisperString(locale.language)!!
         )
-
         shouldPlaySounds = enableSound.await()
+        aiAssistEnabled = enableAiAssist.await()
+        openAiAPIKey = openAiKeyPromise.await()
+        oaiHelper = OpenAIHelper(openAiAPIKey)
 
         return@coroutineScope RecognizerViewSettings(
             shouldShowInlinePartialResult = false,
@@ -116,7 +146,8 @@ private class VoiceInputActionWindow(
             recordingConfiguration = RecordingSettings(
                 preferBluetoothMic = useBluetoothAudio.await(),
                 requestAudioFocus = requestAudioFocus.await()
-            )
+            ),
+            aiAssistEnabled = aiAssistEnabled
         )
     }
 
@@ -157,16 +188,25 @@ private class VoiceInputActionWindow(
     @Composable
     private fun ModelDownloader(modelException: ModelDoesNotExistException) {
         val context = LocalContext.current
-        Box(modifier = Modifier.fillMaxSize().clickable {
-            val intent = Intent(context, DownloadActivity::class.java)
-            intent.putStringArrayListExtra("models", ArrayList(modelException.models.map { model -> model.getRequiredDownloadList(context) }.flatten()))
+        Box(modifier = Modifier
+            .fillMaxSize()
+            .clickable {
+                val intent = Intent(context, DownloadActivity::class.java)
+                intent.putStringArrayListExtra(
+                    "models",
+                    ArrayList(
+                        modelException.models
+                            .map { model -> model.getRequiredDownloadList(context) }
+                            .flatten()
+                    )
+                )
 
-            if(context !is Activity) {
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            }
+                if (context !is Activity) {
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                }
 
-            context.startActivity(intent)
-        }) {
+                context.startActivity(intent)
+            }) {
             Text("Tap to complete setup", modifier = Modifier.align(Alignment.Center))
         }
     }
@@ -230,15 +270,35 @@ private class VoiceInputActionWindow(
     }
 
     override fun finished(result: String) {
-        wasFinished = true
+        if (!aiAssistEnabled) {
+            wasFinished = true
 
-        inputTransaction.commit(result)
-        manager.announce(result)
-        manager.closeActionWindow()
+            inputTransaction.commit(result)
+            manager.announce(result)
+            manager.closeActionWindow()
+            return
+        }
+        oaiHelper.makeRequest(result, object : ResponseCallback {
+            override fun onResponse(content: String) {
+                wasFinished = true
+
+                inputTransaction.commit(content)
+                manager.announce(content)
+                manager.closeActionWindow()
+
+//                mttsHelper.play(content)
+            }
+
+            override fun onFailure(error: String) {
+                System.err.println("Error: $error")
+            }
+        })
     }
 
     override fun partialResult(result: String) {
-        inputTransaction.updatePartial(result)
+        if (!aiAssistEnabled) {
+            inputTransaction.updatePartial(result)
+        }
     }
 
     override fun requestPermission(onGranted: () -> Unit, onRejected: () -> Unit): Boolean {
@@ -265,7 +325,9 @@ private class VoiceInputNoModelWindow(val locale: Locale) : ActionWindow {
                 role = null,
                 indication = null,
                 interactionSource = remember { MutableInteractionSource() })) {
-            Text("No voice input model installed for ${locale.displayLanguage}, tap to check options?", modifier = Modifier.align(Alignment.Center).padding(8.dp), textAlign = TextAlign.Center)
+            Text("No voice input model installed for ${locale.displayLanguage}, tap to check options?", modifier = Modifier
+                .align(Alignment.Center)
+                .padding(8.dp), textAlign = TextAlign.Center)
         }
     }
 

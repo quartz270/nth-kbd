@@ -2,6 +2,7 @@ package org.futo.inputmethod.latin.uix
 
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.core.stringSetPreferencesKey
 
 val ENABLE_SOUND = SettingsKey(
@@ -37,6 +38,16 @@ val PREFER_BLUETOOTH = SettingsKey(
 val AUDIO_FOCUS = SettingsKey(
     key = booleanPreferencesKey("request_audio_focus"),
     default = true
+)
+
+val OPEN_AI_KEY = SettingsKey(
+    key = stringPreferencesKey("open_ai_key"),
+    default = ""
+)
+
+val AI_ASSIST = SettingsKey(
+    key = booleanPreferencesKey("ai_assist"),
+    default = false
 )
 
 val ENGLISH_MODEL_INDEX = SettingsKey(

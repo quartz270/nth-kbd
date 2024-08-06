@@ -546,7 +546,7 @@ fun NavigationItem(title: String, style: NavigationItemStyle, navigate: () -> Un
 }
 
 @Composable
-fun SettingTextField(title: String, placeholder: String, field: SettingsKey<String>) {
+fun SettingTextField(title: String, placeholder: String, field: SettingsKey<String>, singleLine: Boolean = false) {
     val context = LocalContext.current
 
     val personalDict = useDataStore(field)
@@ -561,6 +561,7 @@ fun SettingTextField(title: String, placeholder: String, field: SettingsKey<Stri
 
     TextField(
         value = textFieldValue.value,
+        singleLine = singleLine,
         onValueChange = {
             textFieldValue.value = it
         },

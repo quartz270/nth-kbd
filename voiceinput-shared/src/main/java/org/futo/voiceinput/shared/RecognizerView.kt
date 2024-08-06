@@ -1,6 +1,7 @@
 package org.futo.voiceinput.shared
 
 import android.content.Context
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableFloatStateOf
@@ -25,7 +26,9 @@ data class RecognizerViewSettings(
 
     val modelRunConfiguration: MultiModelRunConfiguration,
     val decodingConfiguration: DecodingConfiguration,
-    val recordingConfiguration: RecordingSettings
+    val recordingConfiguration: RecordingSettings,
+
+    var aiAssistEnabled: Boolean
 )
 
 private val VerboseAnnotations = hashMapOf(
@@ -54,6 +57,8 @@ interface RecognizerViewListener {
     fun finished(result: String)
 
     fun partialResult(result: String)
+
+    fun toggleAIAssist(): Boolean
 
     // Return true if a permission modal was shown, otherwise return false
     fun requestPermission(onGranted: () -> Unit, onRejected: () -> Unit): Boolean
@@ -104,7 +109,9 @@ class RecognizerView(
                 InnerRecognize(
                     magnitude = magnitudeState,
                     state = statusState,
-                    device = currentDeviceState
+                    device = currentDeviceState,
+                    settings = settings,
+                    listener = listener
                 )
             }
 

@@ -1,5 +1,6 @@
 package org.futo.voiceinput.shared.ui
 
+import android.content.Context
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -55,6 +56,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
 import org.futo.voiceinput.shared.R
+import org.futo.voiceinput.shared.RecognizerViewListener
+import org.futo.voiceinput.shared.RecognizerViewSettings
 import org.futo.voiceinput.shared.types.MagnitudeState
 import org.futo.voiceinput.shared.ui.theme.Typography
 
@@ -129,7 +132,7 @@ private fun BoxScope.BluetoothToggleIcon(device: MutableState<MicrophoneDeviceSt
 
         IconButton(modifier = Modifier
             .align(Alignment.BottomEnd)
-            .offset(x = (-16).dp, y = (-16).dp)
+            .offset(x = (-16).dp, y = (-80).dp)
             .drawBehind {
                 val radius = size.height / 4.0f
                 drawRoundRect(
@@ -163,10 +166,59 @@ private fun BoxScope.BluetoothToggleIcon(device: MutableState<MicrophoneDeviceSt
 }
 
 @Composable
+private fun BoxScope.AIAssistToggleIcon(settings: RecognizerViewSettings, listener: RecognizerViewListener) {
+    FakeToast(modifier = Modifier.align(Alignment.BottomCenter).offset(y = (-16).dp), message = if(settings.aiAssistEnabled) {
+        "AI Assistance Enabled"
+    } else {
+        null
+    })
+    val bluetoothColor = MaterialTheme.colorScheme.secondary
+    val iconColor = if(settings.aiAssistEnabled) {
+        MaterialTheme.colorScheme.onSecondary
+    } else {
+        MaterialTheme.colorScheme.onBackground
+    }
+    IconButton(modifier = Modifier
+        .align(Alignment.BottomEnd)
+        .offset(x = (-16).dp, y = (-16).dp)
+        .drawBehind {
+            val radius = size.height / 4.0f
+            drawRoundRect(
+                bluetoothColor,
+                topLeft = Offset(size.width * 0.1f, size.height * 0.05f),
+                size = Size(size.width * 0.8f, size.height * 0.9f),
+                cornerRadius = CornerRadius(radius, radius),
+                style = if (settings.aiAssistEnabled) {
+                    Fill
+                } else {
+                    Stroke(width = 4.0f)
+                }
+            )
+        }
+        .clearAndSetSemantics {
+            this.text = AnnotatedString("Toggle AI Assistance")
+            this.role = Role.Switch
+            this.toggleableState = ToggleableState(settings.aiAssistEnabled)
+        },
+        onClick = {
+            settings.aiAssistEnabled = listener.toggleAIAssist()
+        },
+    ) {
+        Icon(
+            painter = painterResource(id = R.drawable.assist),
+            contentDescription = null,
+            tint = iconColor
+        )
+    }
+}
+
+@Composable
 fun InnerRecognize(
     magnitude: MutableFloatState = mutableFloatStateOf(0.5f),
     state: MutableState<MagnitudeState> = mutableStateOf(MagnitudeState.MIC_MAY_BE_BLOCKED),
-    device: MutableState<MicrophoneDeviceState>? = null
+    device: MutableState<MicrophoneDeviceState>? = null,
+    settings: RecognizerViewSettings,
+    listener: RecognizerViewListener
 ) {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         AnimatedRecognizeCircle(magnitude = magnitude)
@@ -194,6 +246,7 @@ fun InnerRecognize(
         )
 
         BluetoothToggleIcon(device)
+        AIAssistToggleIcon(settings, listener)
     }
 }
 

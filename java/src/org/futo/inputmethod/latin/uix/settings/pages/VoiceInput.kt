@@ -9,9 +9,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import org.futo.inputmethod.latin.R
+import org.futo.inputmethod.latin.uix.AI_ASSIST
 import org.futo.inputmethod.latin.uix.AUDIO_FOCUS
 import org.futo.inputmethod.latin.uix.DISALLOW_SYMBOLS
 import org.futo.inputmethod.latin.uix.ENABLE_SOUND
+import org.futo.inputmethod.latin.uix.OPEN_AI_KEY
 import org.futo.inputmethod.latin.uix.PREFER_BLUETOOTH
 import org.futo.inputmethod.latin.uix.USE_SYSTEM_VOICE_INPUT
 import org.futo.inputmethod.latin.uix.VERBOSE_PROGRESS
@@ -19,6 +21,7 @@ import org.futo.inputmethod.latin.uix.settings.NavigationItem
 import org.futo.inputmethod.latin.uix.settings.NavigationItemStyle
 import org.futo.inputmethod.latin.uix.settings.ScreenTitle
 import org.futo.inputmethod.latin.uix.settings.ScrollableList
+import org.futo.inputmethod.latin.uix.settings.SettingTextField
 import org.futo.inputmethod.latin.uix.settings.SettingToggleDataStore
 import org.futo.inputmethod.latin.uix.settings.useDataStore
 
@@ -83,6 +86,18 @@ fun VoiceInputScreen(navController: NavHostController = rememberNavController())
                 subtitle = "To change the models, visit Languages & Models menu",
                 style = NavigationItemStyle.Misc,
                 navigate = { navController.navigate("languages") }
+            )
+
+            SettingToggleDataStore(
+                title = "AI Assistance",
+                setting = AI_ASSIST
+            )
+
+            SettingTextField(
+                title = "Open AI API Key",
+                field = OPEN_AI_KEY,
+                placeholder = "sk-........",
+                singleLine = true,
             )
         }
     }
