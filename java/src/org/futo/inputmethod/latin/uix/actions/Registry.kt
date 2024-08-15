@@ -19,6 +19,7 @@ val AllActionsMap = mapOf(
     "settings" to SettingsAction,
     "paste" to PasteAction,
     "text_edit" to TextEditAction,
+    "text_enhance" to TextEnhanceAction,
     "themes" to ThemeAction,
     "undo" to UndoAction,
     "redo" to RedoAction,

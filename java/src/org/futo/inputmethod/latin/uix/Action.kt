@@ -68,6 +68,8 @@ interface KeyboardManagerForAction {
 
     fun getLatinIMEForDebug(): LatinIME
     fun isDeviceLocked(): Boolean
+
+    fun getInputConnection(): InputConnection?
 }
 
 interface ActionWindow {

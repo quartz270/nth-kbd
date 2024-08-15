@@ -37,10 +37,14 @@ import org.futo.inputmethod.latin.uix.ActionWindow
 import org.futo.inputmethod.latin.uix.DISALLOW_SYMBOLS
 import org.futo.inputmethod.latin.uix.ENABLE_SOUND
 import org.futo.inputmethod.latin.uix.KeyboardManagerForAction
+import org.futo.inputmethod.latin.uix.OPEN_AI_API_PATH
+import org.futo.inputmethod.latin.uix.OPEN_AI_BASE_URL
 import org.futo.inputmethod.latin.uix.OPEN_AI_KEY
+import org.futo.inputmethod.latin.uix.OPEN_AI_MODEL
 import org.futo.inputmethod.latin.uix.PREFER_BLUETOOTH
 import org.futo.inputmethod.latin.uix.PersistentActionState
 import org.futo.inputmethod.latin.uix.ResourceHelper
+import org.futo.inputmethod.latin.uix.TTS_ASSIST
 import org.futo.inputmethod.latin.uix.VERBOSE_PROGRESS
 import org.futo.inputmethod.latin.uix.getSetting
 import org.futo.inputmethod.latin.uix.setSetting
@@ -98,6 +102,7 @@ private class VoiceInputActionWindow(
 
     private var shouldPlaySounds: Boolean = false
     private var aiAssistEnabled: Boolean = false
+    private var ttsAssistEnabled: Boolean = false
     private var openAiAPIKey: String = ""
 
     private var mttsHelper = TextToSpeechHelper(context)
@@ -111,6 +116,14 @@ private class VoiceInputActionWindow(
         return aiAssistEnabled
     }
 
+    override fun toggleTTSAssist():Boolean  {
+        manager.getLifecycleScope().launch {
+            context.setSetting(TTS_ASSIST, !ttsAssistEnabled)
+        }
+        ttsAssistEnabled = !ttsAssistEnabled
+        return ttsAssistEnabled
+    }
+
     private suspend fun loadSettings(): RecognizerViewSettings = coroutineScope {
         val enableSound = async { context.getSetting(ENABLE_SOUND) }
         val verboseFeedback = async { context.getSetting(VERBOSE_PROGRESS) }
@@ -119,7 +132,10 @@ private class VoiceInputActionWindow(
         val requestAudioFocus = async { context.getSetting(AUDIO_FOCUS) }
 
         val openAiKeyPromise = async { context.getSetting(OPEN_AI_KEY) }
+        val openAiBaseUrlPromise = async { context.getSetting(OPEN_AI_BASE_URL) }
+        val openAiApiPathPromise = async { context.getSetting(OPEN_AI_API_PATH) }
         val enableAiAssist = async { context.getSetting(AI_ASSIST) }
+        val aiModelName = async { context.getSetting(OPEN_AI_MODEL) }
 
         val primaryModel = model
         val languageSpecificModels = mutableMapOf<Language, ModelLoader>()
@@ -127,9 +143,14 @@ private class VoiceInputActionWindow(
             getLanguageFromWhisperString(locale.language)!!
         )
         shouldPlaySounds = enableSound.await()
+
         aiAssistEnabled = enableAiAssist.await()
         openAiAPIKey = openAiKeyPromise.await()
-        oaiHelper = OpenAIHelper(openAiAPIKey)
+
+        val openAiBaseUrl = openAiBaseUrlPromise.await()
+        val openAiApiPath = openAiApiPathPromise.await()
+
+        oaiHelper = OpenAIHelper(openAiAPIKey, openAiBaseUrl, openAiApiPath, aiModelName.await())
 
         return@coroutineScope RecognizerViewSettings(
             shouldShowInlinePartialResult = false,
@@ -147,7 +168,8 @@ private class VoiceInputActionWindow(
                 preferBluetoothMic = useBluetoothAudio.await(),
                 requestAudioFocus = requestAudioFocus.await()
             ),
-            aiAssistEnabled = aiAssistEnabled
+            aiAssistEnabled = aiAssistEnabled,
+            ttsAssistEnabled = ttsAssistEnabled,
         )
     }
 
@@ -270,7 +292,7 @@ private class VoiceInputActionWindow(
     }
 
     override fun finished(result: String) {
-        if (!aiAssistEnabled) {
+        if (!aiAssistEnabled && !ttsAssistEnabled) {
             wasFinished = true
 
             inputTransaction.commit(result)
@@ -281,22 +303,29 @@ private class VoiceInputActionWindow(
         oaiHelper.makeRequest(result, object : ResponseCallback {
             override fun onResponse(content: String) {
                 wasFinished = true
-
-                inputTransaction.commit(content)
-                manager.announce(content)
+                if (ttsAssistEnabled) {
+                    mttsHelper.play(content)
+                } else {
+                    inputTransaction.commit(content)
+                    manager.announce(content)
+                }
                 manager.closeActionWindow()
-
-//                mttsHelper.play(content)
             }
 
             override fun onFailure(error: String) {
-                System.err.println("Error: $error")
+                wasFinished = true
+                if (shouldPlaySounds && !cancelPlayed) {
+                    state.soundPlayer.playCancelSound()
+                    cancelPlayed = true
+                }
+                inputTransaction.cancel()
+                manager.closeActionWindow()
             }
-        })
+        }, OpenAIHelper.CompletionMode.MODE_CHAT)
     }
 
     override fun partialResult(result: String) {
-        if (!aiAssistEnabled) {
+        if (!aiAssistEnabled && !ttsAssistEnabled) {
             inputTransaction.updatePartial(result)
         }
     }

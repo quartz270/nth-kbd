@@ -1,6 +1,7 @@
 package org.futo.inputmethod.latin.uix.settings.pages
 
 import android.content.Intent
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -13,7 +14,10 @@ import org.futo.inputmethod.latin.uix.AI_ASSIST
 import org.futo.inputmethod.latin.uix.AUDIO_FOCUS
 import org.futo.inputmethod.latin.uix.DISALLOW_SYMBOLS
 import org.futo.inputmethod.latin.uix.ENABLE_SOUND
+import org.futo.inputmethod.latin.uix.OPEN_AI_API_PATH
+import org.futo.inputmethod.latin.uix.OPEN_AI_BASE_URL
 import org.futo.inputmethod.latin.uix.OPEN_AI_KEY
+import org.futo.inputmethod.latin.uix.OPEN_AI_MODEL
 import org.futo.inputmethod.latin.uix.PREFER_BLUETOOTH
 import org.futo.inputmethod.latin.uix.USE_SYSTEM_VOICE_INPUT
 import org.futo.inputmethod.latin.uix.VERBOSE_PROGRESS
@@ -88,9 +92,32 @@ fun VoiceInputScreen(navController: NavHostController = rememberNavController())
                 navigate = { navController.navigate("languages") }
             )
 
+            HorizontalDivider()
+
             SettingToggleDataStore(
                 title = "AI Assistance",
                 setting = AI_ASSIST
+            )
+
+            SettingTextField(
+                title = "AI Model Identifier",
+                field = OPEN_AI_MODEL,
+                placeholder = "gpt-4o-mini",
+                singleLine = true,
+            )
+
+            SettingTextField(
+                title = "Open AI Base URL",
+                field = OPEN_AI_BASE_URL,
+                placeholder = "https://api.openai.com/v1",
+                singleLine = true,
+            )
+
+            SettingTextField(
+                title = "Open AI API Path",
+                field = OPEN_AI_API_PATH,
+                placeholder = "/chat/completions",
+                singleLine = true,
             )
 
             SettingTextField(

@@ -37,6 +37,9 @@ import org.futo.inputmethod.latin.R
 import org.futo.inputmethod.latin.common.Constants
 import org.futo.inputmethod.latin.uix.Action
 import org.futo.inputmethod.latin.uix.ActionWindow
+import org.futo.voiceinput.shared.OpenAIHelper
+import org.futo.voiceinput.shared.OpenAIHelper.CompletionMode
+import org.futo.voiceinput.shared.OpenAIHelper.ResponseCallback
 
 @Composable
 fun IconWithColor(@DrawableRes iconId: Int, iconColor: Color, modifier: Modifier = Modifier) {
@@ -402,6 +405,37 @@ val TextEditAction = Action(
             }
         }
     }
+)
+
+val TextEnhanceAction = Action(
+    icon = org.futo.voiceinput.shared.R.drawable.assist,
+    name = R.string.text_enhance_action_title,
+    simplePressImpl = { manager, _ ->
+
+        val ic = manager.getInputConnection();
+        if (ic !== null) {
+            val selectedText = ic.getSelectedText(0)
+            val oai = OpenAIHelper()
+            oai.makeRequest("Enhance and fix the the following text, no follow up questions. Just return the updated text: \n\n $selectedText", object : ResponseCallback {
+                override fun onResponse(content: String?) {
+                    if (content !== null) {
+                        manager.typeText(content)
+                        manager.triggerContentUpdate()
+                    } else {
+                        manager.typeText("$selectedText")
+                    }
+                }
+
+                override fun onFailure(error: String?) {
+                    manager.typeText("$selectedText")
+                }
+            }, CompletionMode.MODE_ENHANCE)
+
+        }
+    },
+    persistentState = null,
+    canShowKeyboard = true,
+    windowImpl = null,
 )
 
 @Composable

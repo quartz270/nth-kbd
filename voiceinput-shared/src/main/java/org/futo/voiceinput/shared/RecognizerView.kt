@@ -28,7 +28,8 @@ data class RecognizerViewSettings(
     val decodingConfiguration: DecodingConfiguration,
     val recordingConfiguration: RecordingSettings,
 
-    var aiAssistEnabled: Boolean
+    var aiAssistEnabled: Boolean,
+    var ttsAssistEnabled: Boolean
 )
 
 private val VerboseAnnotations = hashMapOf(
@@ -59,6 +60,8 @@ interface RecognizerViewListener {
     fun partialResult(result: String)
 
     fun toggleAIAssist(): Boolean
+
+    fun toggleTTSAssist(): Boolean
 
     // Return true if a permission modal was shown, otherwise return false
     fun requestPermission(onGranted: () -> Unit, onRejected: () -> Unit): Boolean

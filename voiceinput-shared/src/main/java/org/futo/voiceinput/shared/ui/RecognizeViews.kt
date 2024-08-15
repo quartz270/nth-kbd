@@ -101,7 +101,10 @@ private fun FakeToast(modifier: Modifier, message: String?) {
     if(message != null) {
         AnimatedVisibility(
             visible = visible.value,
-            modifier = modifier.alpha(0.9f).background(MaterialTheme.colorScheme.surfaceDim, RoundedCornerShape(100)).padding(16.dp),
+            modifier = modifier
+                .alpha(0.9f)
+                .background(MaterialTheme.colorScheme.surfaceDim, RoundedCornerShape(100))
+                .padding(16.dp),
             enter = fadeIn(),
             exit = fadeOut()
         ) {
@@ -114,7 +117,9 @@ private fun FakeToast(modifier: Modifier, message: String?) {
 
 @Composable
 private fun BoxScope.BluetoothToggleIcon(device: MutableState<MicrophoneDeviceState>? = null) {
-    FakeToast(modifier = Modifier.align(Alignment.BottomCenter).offset(y = (-16).dp), message = if(device?.value?.bluetoothActive == true) {
+    FakeToast(modifier = Modifier
+        .align(Alignment.BottomCenter)
+        .offset(y = (-16).dp), message = if(device?.value?.bluetoothActive == true) {
         "Using Bluetooth mic (${device.value.deviceName})"
     } else if(device?.value?.bluetoothAvailable == true || device?.value?.bluetoothPreferredByUser == true) {
         "Using Built-in mic (${device.value.deviceName})"
@@ -132,7 +137,7 @@ private fun BoxScope.BluetoothToggleIcon(device: MutableState<MicrophoneDeviceSt
 
         IconButton(modifier = Modifier
             .align(Alignment.BottomEnd)
-            .offset(x = (-16).dp, y = (-80).dp)
+            .offset(x = (-16).dp, y = (-140).dp)
             .drawBehind {
                 val radius = size.height / 4.0f
                 drawRoundRect(
@@ -167,7 +172,9 @@ private fun BoxScope.BluetoothToggleIcon(device: MutableState<MicrophoneDeviceSt
 
 @Composable
 private fun BoxScope.AIAssistToggleIcon(settings: RecognizerViewSettings, listener: RecognizerViewListener) {
-    FakeToast(modifier = Modifier.align(Alignment.BottomCenter).offset(y = (-16).dp), message = if(settings.aiAssistEnabled) {
+    FakeToast(modifier = Modifier
+        .align(Alignment.BottomCenter)
+        .offset(y = (-16).dp), message = if(settings.aiAssistEnabled) {
         "AI Assistance Enabled"
     } else {
         null
@@ -213,6 +220,48 @@ private fun BoxScope.AIAssistToggleIcon(settings: RecognizerViewSettings, listen
 }
 
 @Composable
+private fun BoxScope.TTSAssistToggleIcon(settings: RecognizerViewSettings, listener: RecognizerViewListener) {
+    val bluetoothColor = MaterialTheme.colorScheme.secondary
+    val iconColor = if(settings.ttsAssistEnabled) {
+        MaterialTheme.colorScheme.onSecondary
+    } else {
+        MaterialTheme.colorScheme.onBackground
+    }
+    IconButton(modifier = Modifier
+        .align(Alignment.BottomEnd)
+        .offset(x = (-16).dp, y = (-80).dp)
+        .drawBehind {
+            val radius = size.height / 4.0f
+            drawRoundRect(
+                bluetoothColor,
+                topLeft = Offset(size.width * 0.1f, size.height * 0.05f),
+                size = Size(size.width * 0.8f, size.height * 0.9f),
+                cornerRadius = CornerRadius(radius, radius),
+                style = if (settings.ttsAssistEnabled) {
+                    Fill
+                } else {
+                    Stroke(width = 4.0f)
+                }
+            )
+        }
+        .clearAndSetSemantics {
+            this.text = AnnotatedString("Toggle TTS Assistance")
+            this.role = Role.Switch
+            this.toggleableState = ToggleableState(settings.ttsAssistEnabled)
+        },
+        onClick = {
+            settings.ttsAssistEnabled = listener.toggleTTSAssist()
+        },
+    ) {
+        Icon(
+            painter = painterResource(id = R.drawable.voice_chat),
+            contentDescription = null,
+            tint = iconColor
+        )
+    }
+}
+
+@Composable
 fun InnerRecognize(
     magnitude: MutableFloatState = mutableFloatStateOf(0.5f),
     state: MutableState<MagnitudeState> = mutableStateOf(MagnitudeState.MIC_MAY_BE_BLOCKED),
@@ -246,6 +295,7 @@ fun InnerRecognize(
         )
 
         BluetoothToggleIcon(device)
+        TTSAssistToggleIcon(settings, listener)
         AIAssistToggleIcon(settings, listener)
     }
 }

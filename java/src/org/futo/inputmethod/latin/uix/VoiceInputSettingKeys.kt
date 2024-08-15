@@ -40,9 +40,29 @@ val AUDIO_FOCUS = SettingsKey(
     default = true
 )
 
+val OPEN_AI_BASE_URL = SettingsKey(
+    key = stringPreferencesKey("open_ai_base_url"),
+    default = "https://api.openai.com/v1"
+)
+
+val OPEN_AI_API_PATH = SettingsKey(
+    key = stringPreferencesKey("open_ai_api_path"),
+    default = "/chat/completions"
+)
+
 val OPEN_AI_KEY = SettingsKey(
     key = stringPreferencesKey("open_ai_key"),
     default = ""
+)
+
+val OPEN_AI_MODEL = SettingsKey(
+    key = stringPreferencesKey("open_ai_model"),
+    default = "gpt-4o-mini"
+)
+
+val TTS_ASSIST = SettingsKey(
+    key = booleanPreferencesKey("tts_assist"),
+    default = false
 )
 
 val AI_ASSIST = SettingsKey(

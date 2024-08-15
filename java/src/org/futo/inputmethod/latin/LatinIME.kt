@@ -723,6 +723,10 @@ class LatinIME : InputMethodService(), LifecycleOwner, ViewModelStoreOwner, Save
         }
     }
 
+    fun getInputConnection(): InputConnection? {
+        return this.currentInputConnection
+    }
+
     val isInputConnectionOverridden
         get() = overrideInputConnection != null
 

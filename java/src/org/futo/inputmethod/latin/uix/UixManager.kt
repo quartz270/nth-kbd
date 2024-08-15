@@ -246,6 +246,10 @@ class UixActionKeyboardManager(val uixManager: UixManager, val latinIME: LatinIM
         return latinIME.latinIMELegacy.locale
     }
 
+    override fun getInputConnection(): InputConnection? {
+        return latinIME.getInputConnection()
+    }
+
     override fun overrideInputConnection(inputConnection: InputConnection, editorInfo: EditorInfo) {
         latinIME.overrideInputConnection(inputConnection, editorInfo)
         uixManager.toggleExpandAction(true)
