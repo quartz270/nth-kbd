@@ -286,9 +286,7 @@ val TranslateAction = Action(
 
             @Composable
             override fun WindowContents(keyboardShown: Boolean) {
-                val view = LocalView.current
-                val languageFrom = remember { mutableStateOf("fr") }
-//                val languageFrom = remember { mutableStateOf("auto") }
+                val languageFrom = remember { mutableStateOf("auto") }
                 val languageTo = remember { mutableStateOf("fr") }
                 val isLoading = remember { mutableStateOf(false) }
                 val error = remember { mutableStateOf<String?>(null) }
@@ -319,12 +317,16 @@ val TranslateAction = Action(
                                         onSuccess = {
                                             Log.d(
                                                 TAG,
-                                                "Translated String (" + languageTo.value + "): $it"
+                                                "Translation Success"
                                             )
                                             manager.replaceAllText(it)
                                             isLoading.value = false
                                         },
                                         onFailure = {
+                                            Log.d(
+                                                TAG,
+                                                "Translation fail       "
+                                            )
                                             error.value = it.message
                                             isLoading.value = false
                                         }
@@ -332,7 +334,7 @@ val TranslateAction = Action(
                                 }
                             }
                         }
-                        Log.d(TAG, "Original String (" +languageFrom.value + "): $updatedString")
+                        Log.d(TAG, "Initiated Translation")
                     },
                     languageFrom,
                     languageTo,
