@@ -38,6 +38,7 @@ interface KeyboardManagerForAction {
     fun createInputTransaction(applySpaceIfNeeded: Boolean): ActionInputTransaction
 
     fun typeText(v: String)
+    fun replaceAllText(v: String)
     fun typeUri(uri: Uri, mimeTypes: List<String>): Boolean
     fun backspace(amount: Int)
 

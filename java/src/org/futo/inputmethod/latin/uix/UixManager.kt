@@ -13,6 +13,7 @@ import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.ExtractedTextRequest
 import android.view.inputmethod.InlineSuggestionsResponse
 import android.view.inputmethod.InputConnection
 import android.view.inputmethod.InputContentInfo
@@ -168,6 +169,15 @@ class UixActionKeyboardManager(val uixManager: UixManager, val latinIME: LatinIM
             latinIME.getBaseInputConnection()?.commitText(v, 1)
         } else {
             latinIME.latinIMELegacy.onTextInput(v)
+        }
+    }
+
+    override fun replaceAllText(v: String) {
+        val ic = latinIME.getBaseInputConnection()
+        if (ic != null) {
+            ic.setComposingRegion(0, ic.getExtractedText(ExtractedTextRequest(), 0)?.text?.length ?: 0)
+            ic.setComposingText("", 1)
+            ic.commitText(v, 1)
         }
     }
 

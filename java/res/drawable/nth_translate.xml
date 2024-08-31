@@ -1,0 +1,188 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt"
+    android:viewportWidth="1000"
+    android:viewportHeight="1000"
+    android:width="24dp"
+    android:height="24dp">
+    <path
+        android:pathData="M200 50C200 22.385762510000003 222.38576251 0 250 0C277.61423749 0 300 22.385762510000003 300 50C300 77.61423749 277.61423749 100 250 100C222.38576251 100 200 77.61423749 200 50"
+        android:fillColor="#000000"
+        android:strokeColor="#000000"
+        android:strokeWidth="1"
+        android:strokeLineCap="round"
+        android:strokeMiterLimit="10" />
+    <path
+        android:pathData="M100 150C100 122.38576251 122.38576251 100 150 100C177.61423749 100 200 122.38576251 200 150C200 177.61423749 177.61423749 200 150 200C122.38576251 200 100 177.61423749 100 150"
+        android:fillColor="#000000"
+        android:strokeColor="#000000"
+        android:strokeWidth="1"
+        android:strokeLineCap="round"
+        android:strokeMiterLimit="10" />
+    <path
+        android:pathData="M0 250C0 222.38576251 22.385762510000003 200 50 200C77.61423749 200 100 222.38576251 100 250C100 277.61423749 77.61423749 300 50 300C22.385762510000003 300 0 277.61423749 0 250"
+        android:fillColor="#000000"
+        android:strokeColor="#000000"
+        android:strokeWidth="1"
+        android:strokeLineCap="round"
+        android:strokeMiterLimit="10" />
+    <path
+        android:pathData="M100 250C100 222.38576251 122.38576251 200 150 200C177.61423749 200 200 222.38576251 200 250C200 277.61423749 177.61423749 300 150 300C122.38576251 300 100 277.61423749 100 250"
+        android:fillColor="#000000"
+        android:strokeColor="#000000"
+        android:strokeWidth="1"
+        android:strokeLineCap="round"
+        android:strokeMiterLimit="10" />
+    <path
+        android:pathData="M200 250C200 222.38576251 222.38576251 200 250 200C277.61423749 200 300 222.38576251 300 250C300 277.61423749 277.61423749 300 250 300C222.38576251 300 200 277.61423749 200 250"
+        android:fillColor="#000000"
+        android:strokeColor="#000000"
+        android:strokeWidth="1"
+        android:strokeLineCap="round"
+        android:strokeMiterLimit="10" />
+    <path
+        android:pathData="M300 250C300 222.38576251 322.38576251 200 350 200C377.61423749 200 400 222.38576251 400 250C400 277.61423749 377.61423749 300 350 300C322.38576251 300 300 277.61423749 300 250"
+        android:fillColor="#000000"
+        android:strokeColor="#000000"
+        android:strokeWidth="1"
+        android:strokeLineCap="round"
+        android:strokeMiterLimit="10" />
+    <path
+        android:pathData="M400 250C400 222.38576251 422.38576251 200 450 200C477.61423749 200 500 222.38576251 500 250C500 277.61423749 477.61423749 300 450 300C422.38576251 300 400 277.61423749 400 250"
+        android:fillColor="#000000"
+        android:strokeColor="#000000"
+        android:strokeWidth="1"
+        android:strokeLineCap="round"
+        android:strokeMiterLimit="10" />
+    <path
+        android:pathData="M500 250C500 222.38576251 522.38576251 200 550 200C577.61423749 200 600 222.38576251 600 250C600 277.61423749 577.61423749 300 550 300C522.38576251 300 500 277.61423749 500 250"
+        android:fillColor="#000000"
+        android:strokeColor="#000000"
+        android:strokeWidth="1"
+        android:strokeLineCap="round"
+        android:strokeMiterLimit="10" />
+    <path
+        android:pathData="M600 250C600 222.38576251 622.38576251 200 650 200C677.61423749 200 700 222.38576251 700 250C700 277.61423749 677.61423749 300 650 300C622.38576251 300 600 277.61423749 600 250"
+        android:fillColor="#000000"
+        android:strokeColor="#000000"
+        android:strokeWidth="1"
+        android:strokeLineCap="round"
+        android:strokeMiterLimit="10" />
+    <path
+        android:pathData="M100 350C100 322.38576251 122.38576251 300 150 300C177.61423749 300 200 322.38576251 200 350C200 377.61423749 177.61423749 400 150 400C122.38576251 400 100 377.61423749 100 350"
+        android:fillColor="#000000"
+        android:strokeColor="#000000"
+        android:strokeWidth="1"
+        android:strokeLineCap="round"
+        android:strokeMiterLimit="10" />
+    <path
+        android:pathData="M700 350C700 322.38576251 722.38576251 300 750 300C777.61423749 300 800 322.38576251 800 350C800 377.61423749 777.61423749 400 750 400C722.38576251 400 700 377.61423749 700 350"
+        android:fillColor="#000000"
+        android:strokeColor="#000000"
+        android:strokeWidth="1"
+        android:strokeLineCap="round"
+        android:strokeMiterLimit="10" />
+    <path
+        android:pathData="M300 450C300 422.38576251 322.38576251 400 350 400C377.61423749 400 400 422.38576251 400 450C400 477.61423749 377.61423749 500 350 500C322.38576251 500 300 477.61423749 300 450"
+        android:fillColor="#000000"
+        android:strokeColor="#000000"
+        android:strokeWidth="1"
+        android:strokeLineCap="round"
+        android:strokeMiterLimit="10" />
+    <path
+        android:pathData="M700 450C700 422.38576251 722.38576251 400 750 400C777.61423749 400 800 422.38576251 800 450C800 477.61423749 777.61423749 500 750 500C722.38576251 500 700 477.61423749 700 450"
+        android:fillColor="#000000"
+        android:strokeColor="#000000"
+        android:strokeWidth="1"
+        android:strokeLineCap="round"
+        android:strokeMiterLimit="10" />
+    <path
+        android:pathData="M200 550C200 522.38576251 222.38576251 500 250 500C277.61423749 500 300 522.38576251 300 550C300 577.61423749 277.61423749 600 250 600C222.38576251 600 200 577.61423749 200 550"
+        android:fillColor="#000000"
+        android:strokeColor="#000000"
+        android:strokeWidth="1"
+        android:strokeLineCap="round"
+        android:strokeMiterLimit="10" />
+    <path
+        android:pathData="M600 550C600 522.38576251 622.38576251 500 650 500C677.61423749 500 700 522.38576251 700 550C700 577.61423749 677.61423749 600 650 600C622.38576251 600 600 577.61423749 600 550"
+        android:fillColor="#000000"
+        android:strokeColor="#000000"
+        android:strokeWidth="1"
+        android:strokeLineCap="round"
+        android:strokeMiterLimit="10" />
+    <path
+        android:pathData="M200 650C200 622.38576251 222.38576251 600 250 600C277.61423749 600 300 622.38576251 300 650C300 677.61423749 277.61423749 700 250 700C222.38576251 700 200 677.61423749 200 650"
+        android:fillColor="#000000"
+        android:strokeColor="#000000"
+        android:strokeWidth="1"
+        android:strokeLineCap="round"
+        android:strokeMiterLimit="10" />
+    <path
+        android:pathData="M800 650C800 622.38576251 822.38576251 600 850 600C877.61423749 600 900 622.38576251 900 650C900 677.61423749 877.61423749 700 850 700C822.38576251 700 800 677.61423749 800 650"
+        android:fillColor="#000000"
+        android:strokeColor="#000000"
+        android:strokeWidth="1"
+        android:strokeLineCap="round"
+        android:strokeMiterLimit="10" />
+    <path
+        android:pathData="M300 750C300 722.38576251 322.38576251 700 350 700C377.61423749 700 400 722.38576251 400 750C400 777.61423749 377.61423749 800 350 800C322.38576251 800 300 777.61423749 300 750"
+        android:fillColor="#000000"
+        android:strokeColor="#000000"
+        android:strokeWidth="1"
+        android:strokeLineCap="round"
+        android:strokeMiterLimit="10" />
+    <path
+        android:pathData="M400 750C400 722.38576251 422.38576251 700 450 700C477.61423749 700 500 722.38576251 500 750C500 777.61423749 477.61423749 800 450 800C422.38576251 800 400 777.61423749 400 750"
+        android:fillColor="#000000"
+        android:strokeColor="#000000"
+        android:strokeWidth="1"
+        android:strokeLineCap="round"
+        android:strokeMiterLimit="10" />
+    <path
+        android:pathData="M500 750C500 722.38576251 522.38576251 700 550 700C577.61423749 700 600 722.38576251 600 750C600 777.61423749 577.61423749 800 550 800C522.38576251 800 500 777.61423749 500 750"
+        android:fillColor="#000000"
+        android:strokeColor="#000000"
+        android:strokeWidth="1"
+        android:strokeLineCap="round"
+        android:strokeMiterLimit="10" />
+    <path
+        android:pathData="M600 750C600 722.38576251 622.38576251 700 650 700C677.61423749 700 700 722.38576251 700 750C700 777.61423749 677.61423749 800 650 800C622.38576251 800 600 777.61423749 600 750"
+        android:fillColor="#000000"
+        android:strokeColor="#000000"
+        android:strokeWidth="1"
+        android:strokeLineCap="round"
+        android:strokeMiterLimit="10" />
+    <path
+        android:pathData="M700 750C700 722.38576251 722.38576251 700 750 700C777.61423749 700 800 722.38576251 800 750C800 777.61423749 777.61423749 800 750 800C722.38576251 800 700 777.61423749 700 750"
+        android:fillColor="#000000"
+        android:strokeColor="#000000"
+        android:strokeWidth="1"
+        android:strokeLineCap="round"
+        android:strokeMiterLimit="10" />
+    <path
+        android:pathData="M800 750C800 722.38576251 822.38576251 700 850 700C877.61423749 700 900 722.38576251 900 750C900 777.61423749 877.61423749 800 850 800C822.38576251 800 800 777.61423749 800 750"
+        android:fillColor="#000000"
+        android:strokeColor="#000000"
+        android:strokeWidth="1"
+        android:strokeLineCap="round"
+        android:strokeMiterLimit="10" />
+    <path
+        android:pathData="M900 750C900 722.38576251 922.38576251 700 950 700C977.61423749 700 1000 722.38576251 1000 750C1000 777.61423749 977.61423749 800 950 800C922.38576251 800 900 777.61423749 900 750"
+        android:fillColor="#000000"
+        android:strokeColor="#000000"
+        android:strokeWidth="1"
+        android:strokeLineCap="round"
+        android:strokeMiterLimit="10" />
+    <path
+        android:pathData="M800 850C800 822.38576251 822.38576251 800 850 800C877.61423749 800 900 822.38576251 900 850C900 877.61423749 877.61423749 900 850 900C822.38576251 900 800 877.61423749 800 850"
+        android:fillColor="#000000"
+        android:strokeColor="#000000"
+        android:strokeWidth="1"
+        android:strokeLineCap="round"
+        android:strokeMiterLimit="10" />
+    <path
+        android:pathData="M700 950C700 922.38576251 722.38576251 900 750 900C777.61423749 900 800 922.38576251 800 950C800 977.61423749 777.61423749 1000 750 1000C722.38576251 1000 700 977.61423749 700 950"
+        android:fillColor="#000000"
+        android:strokeColor="#000000"
+        android:strokeWidth="1"
+        android:strokeLineCap="round"
+        android:strokeMiterLimit="10" />
+</vector>
