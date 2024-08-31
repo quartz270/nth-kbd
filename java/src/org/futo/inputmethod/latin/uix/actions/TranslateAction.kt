@@ -325,7 +325,7 @@ val TranslateAction = Action(
                                         onFailure = {
                                             Log.d(
                                                 TAG,
-                                                "Translation fail       "
+                                                "Translation fail"  
                                             )
                                             error.value = it.message
                                             isLoading.value = false
