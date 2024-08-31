@@ -6,6 +6,7 @@ import androidx.compose.material3.ColorScheme
 import org.futo.inputmethod.latin.uix.theme.presets.AMOLEDDarkPurple
 import org.futo.inputmethod.latin.uix.theme.presets.AMOLEDNothing
 import org.futo.inputmethod.latin.uix.theme.presets.NothingLight
+import org.futo.inputmethod.latin.uix.theme.presets.NothingDark
 import org.futo.inputmethod.latin.uix.theme.presets.ClassicMaterialDark
 import org.futo.inputmethod.latin.uix.theme.presets.ClassicMaterialLight
 import org.futo.inputmethod.latin.uix.theme.presets.CottonCandy
@@ -40,6 +41,7 @@ val ThemeOptions = mapOf(
     AMOLEDDarkPurple.key to AMOLEDDarkPurple,
     AMOLEDNothing.key to AMOLEDNothing,
     NothingLight.key to NothingLight,
+    NothingDark.key to NothingDark,
 
     Sunflower.key to Sunflower,
     Snowfall.key to Snowfall,
