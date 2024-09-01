@@ -46,10 +46,13 @@ import org.futo.inputmethod.keyboard.internal.CloudTranslationHandler
 import org.futo.inputmethod.keyboard.internal.TranslationHelper
 import org.futo.inputmethod.latin.R
 import org.futo.inputmethod.latin.Suggest.TAG
+import org.futo.inputmethod.latin.settings.Settings
 import org.futo.inputmethod.latin.uix.Action
 import org.futo.inputmethod.latin.uix.ActionEditText
 import org.futo.inputmethod.latin.uix.ActionWindow
 import org.futo.inputmethod.latin.uix.LocalManager
+import org.futo.inputmethod.latin.uix.settings.useSharedPrefsString
+import org.futo.inputmethod.latin.uix.settings.useUpdateSharedPrefString
 
 
 @Composable
@@ -57,8 +60,10 @@ fun LanguageDropdown(
     languageList: Map<String, String>,
     mExpanded: MutableState<Boolean>,
     mSelectedText: MutableState<String>,
-    sourceLang: Boolean
+    sourceLang: Boolean,
+    prefKey: String,
 ) {
+    val updateSharedPref = useUpdateSharedPrefString()
     Row (modifier = Modifier.fillMaxWidth()) {
         Surface(
             color = MaterialTheme.colorScheme.surfaceBright,
@@ -91,6 +96,7 @@ fun LanguageDropdown(
                 }, onClick = {
                     mExpanded.value = false
                     mSelectedText.value = langCode
+                    updateSharedPref(prefKey, langCode)
                 }, enabled = isTargetAuto,
                 trailingIcon = {
                     if(langCode === "auto") IconWithColor(iconId = R.drawable.auto_detect, iconColor = MaterialTheme.colorScheme.onBackground)
@@ -108,7 +114,7 @@ fun LanguageSelector(modifier: Modifier, isLoading: Boolean, mSelectedLanguage1:
 
     Row(modifier = modifier) {
         Column (modifier = Modifier.weight(5f)) {
-            LanguageDropdown(mLanguages, mExpanded1, mSelectedLanguage1, true)
+            LanguageDropdown(mLanguages, mExpanded1, mSelectedLanguage1, true, Settings.PREF_KEY_LAST_SOURCE_LANG)
         }
         Column (modifier = Modifier
             .weight(1f)
@@ -152,7 +158,7 @@ fun LanguageSelector(modifier: Modifier, isLoading: Boolean, mSelectedLanguage1:
             }
         }
         Column (modifier = Modifier.weight(5f)) {
-            LanguageDropdown(mLanguages, mExpanded2, mSelectedLanguage2, false)
+            LanguageDropdown(mLanguages, mExpanded2, mSelectedLanguage2, false, Settings.PREF_KEY_LAST_TARGET_LANG)
         }
     }
 }
@@ -286,8 +292,11 @@ val TranslateAction = Action(
 
             @Composable
             override fun WindowContents(keyboardShown: Boolean) {
-                val languageFrom = remember { mutableStateOf("auto") }
-                val languageTo = remember { mutableStateOf("fr") }
+                val (sourcePref, _) = useSharedPrefsString(Settings.PREF_KEY_LAST_SOURCE_LANG, "auto")
+                val (targetPref, _) = useSharedPrefsString(Settings.PREF_KEY_LAST_TARGET_LANG, "fr")
+
+                val languageFrom = remember { mutableStateOf(sourcePref) }
+                val languageTo = remember { mutableStateOf(targetPref) }
                 val isLoading = remember { mutableStateOf(false) }
                 val error = remember { mutableStateOf<String?>(null) }
 

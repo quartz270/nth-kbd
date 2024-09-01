@@ -124,6 +124,9 @@ public final class Settings implements SharedPreferences.OnSharedPreferenceChang
     public static final int BACKSPACE_MODE_CHARACTERS = 0; // Long-press backspace and swipe backspace removes just characters
     public static final int BACKSPACE_MODE_WORDS = 1; // Long-press backspace and swipe backspace removes entire words
 
+    // Translation
+    public static final String PREF_KEY_LAST_SOURCE_LANG = "pref_key_last_source_lang";
+    public static final String PREF_KEY_LAST_TARGET_LANG = "pref_key_last_target_lang";
 
     // Emoji
     public static final String PREF_EMOJI_RECENT_KEYS = "emoji_recent_keys";

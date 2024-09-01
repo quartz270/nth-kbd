@@ -149,6 +149,37 @@ fun useSharedPrefsInt(key: String, default: Int): DataStoreItem<Int> {
     )
 }
 
+@Composable
+fun useSharedPrefsString(key: String, default: String): DataStoreItem<String> {
+    return useSharedPrefsGeneric(key, default,
+        get = { sharedPreferences, k, d ->
+            sharedPreferences.getString(k, d) ?: d
+        },
+        put = { sharedPreferences, k, v ->
+            sharedPreferences.edit {
+                putString(k, v)
+            }
+        }
+    )
+}
+
+@Composable
+fun useUpdateSharedPrefString(): (String, String) -> Unit {
+    val coroutineScope = rememberCoroutineScope()
+    val context = LocalContext.current
+    val sharedPrefs = remember { PreferenceUtils.getDefaultSharedPreferences(context) }
+
+    return { key: String, updatedValue: String ->
+        coroutineScope.launch {
+            withContext(Dispatchers.IO) {
+                sharedPrefs.edit {
+                    putString(key, updatedValue)
+                }
+            }
+        }
+    }
+}
+
 
 @Composable
 private fun<T> SyncDataStoreToPreferences(key: SettingsKey<T>, update: (newValue: T, editor: SharedPreferences.Editor) -> Unit) {
