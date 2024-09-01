@@ -60,6 +60,7 @@ import org.futo.inputmethod.latin.uix.theme.presets.NothingDark
 import org.futo.inputmethod.latin.uix.theme.presets.ClassicMaterialDark
 import org.futo.inputmethod.latin.uix.theme.presets.DynamicDarkTheme
 import org.futo.inputmethod.latin.uix.theme.presets.DynamicLightTheme
+import org.futo.inputmethod.latin.uix.theme.presets.DynamicNothing
 import org.futo.inputmethod.latin.uix.theme.presets.DynamicSystemTheme
 import org.futo.inputmethod.latin.uix.theme.presets.VoiceInputTheme
 import kotlin.math.roundToInt
@@ -317,6 +318,13 @@ private fun ThemePickerPreview() {
             }
         }
         UixThemeWrapper(AMOLEDNothing.obtainColors(LocalContext.current)) {
+            Surface(
+                color = MaterialTheme.colorScheme.background
+            ) {
+                ThemePicker {}
+            }
+        }
+        UixThemeWrapper(DynamicNothing.obtainColors(LocalContext.current)) {
             Surface(
                 color = MaterialTheme.colorScheme.background
             ) {

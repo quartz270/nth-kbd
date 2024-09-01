@@ -1,5 +1,6 @@
 package org.futo.inputmethod.latin.uix.theme.presets
 
+import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
@@ -84,6 +85,10 @@ private val colorScheme = darkColorScheme(
     outlineVariant = md_theme_dark_outlineVariant,
     scrim = md_theme_dark_scrim,
 )
+
+fun getNothingDarkColorScheme(): ColorScheme {
+    return colorScheme
+}
 
 val NothingDark = ThemeOption(
     dynamic = false,
