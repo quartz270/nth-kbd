@@ -31,7 +31,7 @@ import org.futo.inputmethod.updates.DISABLE_UPDATE_REMINDER
 import org.futo.inputmethod.updates.dismissedMigrateUpdateNotice
 
 
-val IS_DEVELOPER = SettingsKey(booleanPreferencesKey("isDeveloperMode"), false)
+val IS_DEVELOPER = SettingsKey(booleanPreferencesKey("isDeveloperMode"), true)
 
 val TMP_PAYMENT_URL = SettingsKey(stringPreferencesKey("temporaryPaymentUrl"), BuildConfig.PAYMENT_URL)
 
