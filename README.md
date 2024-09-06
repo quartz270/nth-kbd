@@ -1,10 +1,23 @@
-# FUTO Keyboard
+# N Keyboard
+
+![Screenshot_20240907-021850](https://github.com/user-attachments/assets/6c76aace-ea82-4c84-a981-69f109a8372d)
+
+![Screenshot_20240907-021921](https://github.com/user-attachments/assets/8e07a845-793c-4a21-a564-23b7f82e5c79)
+
+- Added Translation Panel
+- Added More ASCII Emojis
+- Updated font
+- Added themes - Dark, Light, Dynamic
+
+---
+# built over FUTO Keyboard
 
 The goal is to make a good keyboard that doesn't spy on users. This repository is a fork of [LatinIME (the Android Open-Source Keyboard)](https://android.googlesource.com/platform/packages/inputmethods/LatinIME).
 
 The code is licensed under the [FUTO Source First License 1.0](LICENSE.md).
 
 Check out the [FUTO Keyboard Wiki](https://gitlab.futo.org/alex/keyboard-wiki/-/wikis/FUTO-Keyboard)
+
 
 ## Building
 
