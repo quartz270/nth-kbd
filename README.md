@@ -1,6 +1,6 @@
 # N Keyboard
 
-[Download APK](https://github.com/quartz270/nth-kbd/releases/latest)
+## [Download from the latest GitHub Release](https://github.com/quartz270/nth-kbd/releases/latest)
 
 ---
 
