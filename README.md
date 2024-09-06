@@ -1,5 +1,9 @@
 # N Keyboard
 
+[Download APK](https://github.com/quartz270/nth-kbd/releases/latest)
+
+---
+
 ![Screenshot_20240907-021850](https://github.com/user-attachments/assets/6c76aace-ea82-4c84-a981-69f109a8372d)
 
 ![Screenshot_20240907-021921](https://github.com/user-attachments/assets/8e07a845-793c-4a21-a564-23b7f82e5c79)
