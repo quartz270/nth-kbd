@@ -23663,5 +23663,473 @@
     "tags": [],
     "unicode_version": "",
     "ios_version": ""
+  },
+  {
+    "emoji": "⊂(◉‿◉)つ",
+    "description": "acid",
+    "category": "ASCII",
+    "aliases": ["acid"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "(ㆆ _ ㆆ)",
+    "description": "afraid",
+    "category": "ASCII",
+    "aliases": ["afraid"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "☜(⌒▽⌒)☞",
+    "description": "angel",
+    "category": "ASCII",
+    "aliases": ["angel"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "•`_´•",
+    "description": "angry",
+    "category": "ASCII",
+    "aliases": ["angry"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "⤜(ⱺ ʖ̯ⱺ)⤏",
+    "description": "arrowhead",
+    "category": "ASCII",
+    "aliases": ["arrowhead"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "(‿|‿)",
+    "description": "butt",
+    "category": "ASCII",
+    "aliases": ["butt"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "•͡˘㇁•͡˘",
+    "description": "awkward",
+    "category": "ASCII",
+    "aliases": ["awkward"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "/|\\ ^._.^ /|\\",
+    "description": "bat",
+    "category": "ASCII",
+    "aliases": ["bat"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "ʕ·͡ᴥ·ʔ",
+      "description": "koala",
+    "category": "ASCII",
+    "aliases": ["koala"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "ʕノ•ᴥ•ʔノ ︵ ┻━┻",
+    "description": "bearflip",
+    "category": "ASCII",
+    "aliases": ["bearflip"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "ʕっ•ᴥ•ʔっ",
+    "description": "bearhug",
+    "category": "ASCII",
+    "aliases": ["bearhug"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "0__#",
+    "description": "blackeye",
+    "category": "ASCII",
+    "aliases": ["blackeye"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "( 0 _ 0 )",
+    "description": "blubby",
+    "category": "ASCII",
+    "aliases": ["blubby"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "(˵ ͡° ͜ʖ ͡°˵)",
+    "description": "blush",
+    "category": "ASCII",
+    "aliases": ["blush"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "┌( ͝° ͜ʖ͡°)=ε/̵͇̿̿/'̿'̿ ̿",
+    "description": "007",
+    "category": "ASCII",
+    "aliases": ["007"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "( . Y . )",
+    "description": "boobs",
+    "category": "ASCII",
+    "aliases": ["boobs"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "(-_-)",
+    "description": "bored",
+    "category": "ASCII",
+    "aliases": ["bored"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "( •͡˘ _•͡˘)ノð",
+    "description": "bribe",
+    "category": "ASCII",
+    "aliases": ["bribe"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "( ˘ ³˘)ノ°ﾟº❍｡",
+    "description": "bubbles",
+    "category": "ASCII",
+    "aliases": ["bubbles"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "(= ФェФ=)",
+    "description": "cat",
+    "category": "ASCII",
+    "aliases": ["cat"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "( ͡° ᴥ ͡°)",
+    "description": "catlenny",
+    "category": "ASCII",
+    "aliases": ["catlenny"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "※\\(^o^)/※",
+    "description": "cheer",
+    "category": "ASCII",
+    "aliases": ["cheer"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "╭(ʘ̆~◞౪◟~ʘ̆)╮",
+    "description": "chubby",
+    "category": "ASCII",
+    "aliases": ["chubby"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "(͡ ° ͜ʖ ͡ °)",
+    "description": "claro",
+    "category": "ASCII",
+    "aliases": ["claro"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "ヽ༼ ຈل͜ຈ༼ ▀̿̿Ĺ̯̿̿▀̿ ̿༽Ɵ͆ل͜Ɵ͆ ༽ﾉ",
+    "description": "squad",
+    "category": "ASCII",
+    "aliases": ["squad"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "c[_]",
+    "description": "cuppa",
+    "category": "ASCII",
+    "aliases": ["cuppa"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "ԅ(≖‿≖ԅ)",
+    "description": "creep",
+    "category": "ASCII",
+    "aliases": ["creep"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "ƪ(ړײ)",
+    "description": "creepcute",
+    "category": "ASCII",
+    "aliases": ["creepcute"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "( ✜︵✜ )",
+    "description": "crim3s",
+    "category": "ASCII",
+    "aliases": ["crim3s"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "(╥﹏╥)",
+    "description": "cry",
+    "category": "ASCII",
+    "aliases": ["cry"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "(｡◕‿‿◕｡)",
+    "description": "cute",
+    "category": "ASCII",
+    "aliases": ["cute"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "⚀",
+    "description": "d1",
+    "category": "ASCII",
+    "aliases": ["d1"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "⚁",
+    "description": "d2",
+    "category": "ASCII",
+    "aliases": ["d2"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "⚂",
+    "description": "d3",
+    "category": "ASCII",
+    "aliases": ["d3"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "⚃",
+    "description": "d4",
+    "category": "ASCII",
+    "aliases": ["d4"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "⚄",
+    "description": "d5",
+    "category": "ASCII",
+    "aliases": ["d5"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "⚅",
+    "description": "d6",
+    "category": "ASCII",
+    "aliases": ["d6"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "ヽ( •_)ᕗ",
+    "description": "dab",
+    "category": "ASCII",
+    "aliases": ["dab"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "(ᕗ ͠° ਊ ͠° )ᕗ",
+    "description": "damnyou",
+    "category": "ASCII",
+    "aliases": ["damnyou"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "ᕕ(⌐■_■)ᕗ ♪♬",
+    "description": "dance",
+    "category": "ASCII",
+    "aliases": ["dance"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "x⸑x",
+    "description": "dead",
+    "category": "ASCII",
+    "aliases": ["dead"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "(⌐■_■)",
+    "description": "dwi",
+    "category": "ASCII",
+    "aliases": ["dwi"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "(︶︹︶)",
+    "description": "depressed",
+    "category": "ASCII",
+    "aliases": ["depressed"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "☉ ‿ ⚆",
+    "description": "derp",
+    "category": "ASCII",
+    "aliases": ["derp"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "d[-_-]b",
+    "description": "dj",
+    "category": "ASCII",
+    "aliases": ["dj"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "(◕ᴥ◕ʋ)",
+    "description": "dog",
+    "category": "ASCII",
+    "aliases": ["dog"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "[̲̅$̲̅(̲̅ιο̲̅̅)̲̅$̲̅]",
+    "description": "$",
+    "category": "ASCII",
+    "aliases": ["$"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "(̿▀̿ ̿Ĺ̯̿̿▀̿ ̿)̄",
+    "description": "dong",
+    "category": "ASCII",
+    "aliases": ["dong"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "ヽ༼ຈل͜ຈ༽ﾉ",
+    "description": "donger",
+    "category": "ASCII",
+    "aliases": ["donger"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "(- ʖ̯-)",
+    "description": "idc",
+    "category": "ASCII",
+    "aliases": ["idc"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "ヽ(｀Д´)ﾉ",
+    "description": "dontwant",
+    "category": "ASCII",
+    "aliases": ["dontwant"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
+  },
+  {
+    "emoji": "<(^_^)>",
+    "description": "dope",
+    "category": "ASCII",
+    "aliases": ["dope"],
+    "tags": [],
+    "unicode_version": "",
+    "ios_version": ""
   }
 ]
